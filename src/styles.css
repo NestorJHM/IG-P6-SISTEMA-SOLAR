@@ -1,0 +1,296 @@
+/* ==========================================================================
+   ESTILOS GENERALES Y SCI-FI - PRÁCTICA S6 INFORMÁTICA GRÁFICA
+   ========================================================================== */
+
+/* Reseteo básico y lienzo WebGL */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #000000;
+  user-select: none;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Efectos hover y pulsación en botones */
+button:hover {
+  filter: brightness(1.25);
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+/* ==========================================================================
+   ANIMACIONES SCI-FI (MIRA Y ESCÁNER)
+   ========================================================================== */
+
+
+
+
+
+/* Pulsación de la mira holográfica al bloquear objetivo */
+@keyframes lockPulse {
+  0% {
+    border-color: rgba(0, 229, 255, 0.5);
+    box-shadow: 0 0 12px rgba(0, 229, 255, 0.3);
+  }
+  50% {
+    border-color: rgba(0, 255, 170, 0.9);
+    box-shadow: 0 0 25px rgba(0, 255, 170, 0.65);
+  }
+  100% {
+    border-color: rgba(0, 229, 255, 0.5);
+    box-shadow: 0 0 12px rgba(0, 229, 255, 0.3);
+  }
+}
+
+.scifi-target-box {
+  animation: lockPulse 2s infinite ease-in-out;
+}
+
+/* ==========================================================================
+   ELEMENTOS DE CABINA Y HUD DE LA NAVE
+   ========================================================================== */
+
+
+/* Textura interior del Halcón Milenario */
+#cockpitOverlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  background-size: 100% 100%;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  z-index: 15;
+}
+
+/* Cartel sci-fi con telemetría del objetivo enfocado (Arriba a la derecha) */
+#scifiTargetLabel, #animationSpeedPanel {
+  display: none;
+  position: fixed;
+  top: 18px;
+  right: 24px;
+  min-width: 280px;
+  background: rgba(4, 14, 28, 0.94);
+  border: 1px solid #00e5ff;
+  border-left: 4px solid #00ffaa;
+  border-radius: 6px;
+  padding: 12px 16px;
+  color: #e0f7ff;
+  font-family: 'Rajdhani', sans-serif;
+  box-shadow: 0 0 22px rgba(0, 229, 255, 0.45);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  transform: translateX(15px);
+  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+  pointer-events: none;
+  z-index: 150;
+}
+
+#animationSpeedPanel {
+  display: block;
+  left: 24px;
+  right: auto;
+  opacity: 1;
+  transform: none;
+}
+
+#animationSpeedTitle {
+  font-family: 'Orbitron', monospace;
+  font-size: 10px;
+  color: #00ffaa;
+  letter-spacing: 1.5px;
+  border-bottom: 1px solid rgba(0, 229, 255, 0.3);
+  padding-bottom: 4px;
+  margin-bottom: 6px;
+}
+
+#simulationTimeLabel {
+  font-family: 'Orbitron', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  color: #00e5ff;
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.7);
+  line-height: 1.5;
+}
+
+
+
+/* Mensajes HUD centrales flotantes */
+#hudMessage {
+  position: fixed;
+  top: 85px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(5, 15, 30, 0.9);
+  border: 1px solid rgba(0, 229, 255, 0.65);
+  color: #70f3ff;
+  padding: 9px 26px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 13px;
+  font-family: 'Orbitron', monospace;
+  letter-spacing: 1.2px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  z-index: 90;
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.35);
+  text-align: center;
+}
+
+/* Recordatorio de teclas Tab */
+#controlsReminder {
+  position: fixed;
+  bottom: 18px;
+  left: 24px;
+  color: rgba(0, 229, 255, 0.85);
+  font-family: 'Orbitron', monospace;
+  font-size: 11px;
+  z-index: 90;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px rgba(0, 229, 255, 0.6);
+  pointer-events: none;
+}
+
+.controls-help-sections {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+}
+
+.controls-help-sections section {
+  min-width: 0;
+}
+
+.controls-help-sections h3 {
+  margin: 0 0 6px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(0, 229, 255, 0.3);
+  color: #00e5ff;
+  font-family: 'Orbitron', monospace;
+  font-size: 11px;
+}
+
+#solarRadar {
+  position: absolute;
+  display: block;
+  border-radius: 10%;
+  pointer-events: none;
+}
+
+#keyboardProtectionBtn {
+  margin: 0 0 4px;
+  padding: 6px 10px;
+  border: 1px solid #00e5ff;
+  border-radius: 4px;
+  background: #0b3044;
+  color: #e0f7ff;
+  font: inherit;
+  cursor: pointer;
+}
+
+/* Panel de controles opaco a la izquierda (Tecla Tab). */
+#controlsHelpPanel {
+  display: block;
+  position: fixed;
+  top: 128px;
+  left: 24px;
+  transform: none;
+  width: min(440px, calc(100vw - 48px));
+  max-height: calc(100dvh - 152px);
+  box-sizing: border-box;
+  overflow-y: auto;
+  background: #061321;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.65);
+  border: 1px dashed rgba(0, 229, 255, 0.45);
+  border-left: 3px solid #00e5ff;
+  color: #e0f7ff;
+  padding: 14px 18px;
+  border-radius: 4px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  z-index: 100;
+  pointer-events: auto;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.95), 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+
+/* Cruz de 1 px con centro abierto; su posición la comparte la óptica del visor. */
+#cabinReticle,
+#generalReticle {
+  position: fixed;
+  width: 19px;
+  height: 19px;
+  transform: translate(-50%, -50%);
+  color: rgba(195, 240, 244, 0.85);
+  filter: drop-shadow(0 0 1px #000);
+  pointer-events: none;
+  z-index: 20;
+}
+#cabinReticle::before,
+#cabinReticle::after,
+#generalReticle::before,
+#generalReticle::after {
+  content: "";
+  position: absolute;
+}
+#cabinReticle::before,
+#generalReticle::before {
+  left: 0;
+  top: 9px;
+  width: 19px;
+  height: 1px;
+  background: linear-gradient(to right, currentColor 0 7px, transparent 7px 12px, currentColor 12px);
+}
+#cabinReticle::after,
+#generalReticle::after {
+  left: 9px;
+  top: 0;
+  width: 1px;
+  height: 19px;
+  background: linear-gradient(to bottom, currentColor 0 7px, transparent 7px 12px, currentColor 12px);
+}
+
+/* F mantiene la cabina, los efectos y las instrucciones; solo Tab oculta la ayuda. */
+#cockpitOverlay, #controlsHelpPanel { visibility: visible; }
+
+#scifiTargetLabel, #animationSpeedPanel { max-width: min(350px, calc(100vw - 48px)); box-sizing: border-box; }
+#planetHistory {
+  max-height: min(210px, 30vh);
+  overflow-y: auto;
+  margin-top: 12px;
+  padding: 0 8px 0 0;
+  border-top: 1px solid rgba(0,229,255,.3);
+  color: #d5e4ef;
+  font-size: 14px;
+  line-height: 1.65;
+  scrollbar-width: thin;
+  pointer-events: auto;
+}
+#planetHistory h3 { font-size: 13px; color: #80deea; }
+#planetHistory p { margin: 12px 0; }
+#planetHistory a { color: #80deea; }
+@media (max-width: 600px) {
+  #scifiTargetLabel { min-width: 0 !important; right: 12px !important; max-width: calc(100vw - 24px); }
+  #animationSpeedPanel { min-width: 0; left: 12px; max-width: calc(100vw - 24px); }
+}
+
+
+

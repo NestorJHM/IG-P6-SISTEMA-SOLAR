@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>Práctica S6 - Sistema Solar y Vuelo de Precisión</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+  <!-- Tipografía Sci-Fi futurista para HUD y mira de la nave -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Estilos de la aplicación -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Import Map para soporte nativo universal en navegador (Live Server / HTTP estático) -->
+  <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.152.1/build/three.module.js"
+        }
+      }
+    </script>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script>
+    // Detección amistosa de protocolo file:// (CORS de módulos ES)
+    if (window.location.protocol === "file:") {
+      window.addEventListener("DOMContentLoaded", () => {
+        setTimeout(() => {
+          if (!document.querySelector("canvas")) {
+            const warning = document.createElement("div");
+            warning.id = "fileProtocolNotice";
+            warning.style.cssText =
+              "position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(2,8,18,0.95);color:#00e5ff;font-family:'Rajdhani',sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;padding:24px;text-align:center;";
+            warning.innerHTML = `
+                <div style="max-width:650px;border:1px solid #00e5ff;border-radius:10px;padding:30px;background:rgba(4,16,32,0.95);box-shadow:0 0 30px rgba(0,229,255,0.4);">
+                  <h2 style="font-family:'Orbitron',monospace;color:#ffcc00;margin-top:0;">⚠ EJECUTAR CON SERVIDOR WEB LOCAL</h2>
+                  <p style="font-size:16px;line-height:1.6;color:#e0f7ff;">
+                    Los navegadores modernos bloquean la carga de módulos ES (<code style="color:#00ffaa;">type='module'</code>) al hacer doble clic directo (<code style="color:#ffcc00;">file:///</code>) por políticas de seguridad del navegador (CORS).
+                  </p>
+                  <div style="background:rgba(0,0,0,0.5);border-left:4px solid #00ffaa;padding:14px 18px;text-align:left;margin:20px 0;font-family:monospace;font-size:14px;color:#a7ffeb;line-height:1.8;">
+                    <strong>Cómo abrir la aplicación:</strong><br/>
+                    1. <strong>En VS Code:</strong> Clic derecho en <code>src/index.html</code> ➔ <em>"Open with Live Server"</em>.<br/>
+                    2. <strong>En terminal:</strong> Ejecutar <code>npx serve .</code> o <code>npm start</code> y abrir el enlace local.<br/>
+                    3. <strong>Con Python:</strong> Ejecutar <code>python -m http.server</code> y abrir <code>http://localhost:8000/src/</code>
+                  </div>
+                </div>
+              `;
+            document.body.appendChild(warning);
+          }
+        }, 1200);
+      });
+    }
+  </script>
+
+  <!-- Script del Sistema Solar con Navegación y Detección de Objetivos -->
+  <script src="sistema_solar.js" type="module"></script>
+</body>
+
+</html>
