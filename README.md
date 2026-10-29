@@ -95,7 +95,7 @@ El modo inicial ×1 representa 0,25 días por segundo; por tanto, ×4 representa
 
 La captura del puntero y la protección de los atajos reservados del navegador dependen de la compatibilidad del navegador con las API de bloqueo del ratón y del teclado.
 
-### 3.1. [Ver vídeo de demostración](docs/capturas/recorrido-vuelo.mp4)
+### 3.1. [Ver vídeo de demostración](https://youtu.be/vOr3JK-TqUs)
 
 ## 4. Elaboración e implementación
 
