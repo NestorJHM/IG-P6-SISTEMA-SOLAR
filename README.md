@@ -1,4 +1,4 @@
-# Práctica 6 · Simulación interactiva del sistema solar
+# Práctica 6 · Simulación interactiva del Sistema Solar
 
 ## Índice
 
