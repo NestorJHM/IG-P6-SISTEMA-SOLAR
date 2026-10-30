@@ -1,4 +1,4 @@
-# Práctica 6 · Simulación interactiva del Sistema Solar
+# INFORMÁTICA GRÁFICA: Práctica 6 · Simulación interactiva del Sistema Solar (ULPGC'26)
 
 ## Índice
 
